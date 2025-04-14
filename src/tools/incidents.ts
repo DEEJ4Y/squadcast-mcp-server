@@ -3,6 +3,8 @@ import listIncidents from "../services/incidents/listIncidents";
 import z from "zod";
 import acknowledgeIncidents from "../services/incidents/acknowledge";
 import resolveIncidents from "../services/incidents/resolve";
+import updateIncidentPriorities from "../services/incidents/priority/update";
+import addIncidentNote from "../services/incidents/notes/add";
 
 const initIncidentsTools = (server: McpServer) => {
   server.tool(
@@ -48,6 +50,36 @@ const initIncidentsTools = (server: McpServer) => {
         .describe("An array of incident IDs to resolve."),
     },
     resolveIncidents
+  );
+
+  // Priority
+  server.tool(
+    "updateIncidentPriorities",
+    "Update the priority of incidents given an array of incident IDs and a priority.",
+    {
+      incidentIds: z
+        .array(z.string())
+        .describe("An array of incident IDs to update."),
+      priority: z
+        .string()
+        .describe(
+          "The priority of the incident. Should be one of: 'UNSET', 'P1', 'P2', 'P3', 'P4', 'P5'."
+        ),
+    },
+    updateIncidentPriorities
+  );
+
+  // Notes
+  server.tool(
+    "addIncidentNote",
+    "Add a note to an incident given an incident ID and a note.",
+    {
+      incidentId: z
+        .string()
+        .describe("The ID of the incident to add a note to."),
+      note: z.string().describe("The note to add to the incident."),
+    },
+    addIncidentNote
   );
 };
 
