@@ -9,9 +9,9 @@ const addIncidentNote = async (data: {
 }): Promise<CallToolResult> => {
   try {
     const response = await apiInstance.post(
-      `/v3/incidents/${data.incidentId}/note`,
+      `/v3/incidents/${data.incidentId}/warroom`,
       {
-        priority: data.note,
+        message: data.note,
       },
       {
         headers: {
@@ -20,8 +20,11 @@ const addIncidentNote = async (data: {
       }
     );
 
-    if (response.status !== 200) {
-      throw new Error("Failed to add note to incident.");
+    if (response.status !== 201) {
+      throw new Error(
+        "Failed to add note to incident." +
+          JSON.stringify(response.data, null, 2)
+      );
     }
 
     return getTextContent(`Added note to incident.`);
