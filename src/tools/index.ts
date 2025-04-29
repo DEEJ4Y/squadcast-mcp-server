@@ -5,6 +5,7 @@ import initSchedulesTools from "./schedules";
 import initIncidentsTools from "./incidents";
 import initStatusPagesTools from "./statusPages";
 import initUtilsTools from "./utils";
+import initEscalationPolicyTools from "./escalationPolicy";
 
 const initTools = (server: McpServer) => {
   initOAuthTools(server);
@@ -13,6 +14,7 @@ const initTools = (server: McpServer) => {
   initIncidentsTools(server);
   initStatusPagesTools(server);
   initUtilsTools(server);
+  initEscalationPolicyTools(server);
 };
 
 export default initTools;
