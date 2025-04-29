@@ -9,7 +9,7 @@ import addIncidentNote from "../services/incidents/notes/add";
 const initIncidentsTools = (server: McpServer) => {
   server.tool(
     "listIncidents",
-    `List all incidents (with filters). Current time: ${new Date().toISOString()}.`,
+    `List all incidents (with filters). Use the 'getTime' tool to get the current time.`,
     {
       startTime: z
         .string()
