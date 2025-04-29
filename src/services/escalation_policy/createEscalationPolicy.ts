@@ -45,7 +45,7 @@ interface EscalationPolicyBody {
 
 const createEscalationPolicy = async (body: EscalationPolicyBody): Promise<CallToolResult> => {
   try {
-    const requestBody = {
+    const requestBody:EscalationPolicyBody = {
       description: body.description || "",
       name: body.name,
       owner_id: body.owner_id,
@@ -58,7 +58,8 @@ const createEscalationPolicy = async (body: EscalationPolicyBody): Promise<CallT
           id: entity.id,
           type: entity.type
         })),
-        via: rule.via
+        via: rule.via,
+        roundrobin_enabled: rule.roundrobin_enabled || false,
       })),
       enable_incident_reminders: body.enable_incident_reminders || false,
       incident_reminder_rules: body.incident_reminder_rules || [],
