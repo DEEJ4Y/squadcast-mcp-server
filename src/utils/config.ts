@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+
 const getConfig = async () => {
   try {
     const configPath = process.argv[1].includes("/")

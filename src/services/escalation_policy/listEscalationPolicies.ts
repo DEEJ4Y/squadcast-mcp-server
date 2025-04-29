@@ -6,7 +6,7 @@ import getTextContent from "../../utils/contentModifiers/text";
 const listEscalationPolicies = async (): Promise<CallToolResult> => {
   try {
     const response = await apiInstance.get(
-      `/v3/escalation-policies?owner_id=${await store.team.get()}`,
+      `/v3/escalation-policy?owner_id=${await store.team.get()}`,
       {
         headers: {
           Authorization: `Bearer ${await store.accessToken.get()}`,
@@ -15,7 +15,13 @@ const listEscalationPolicies = async (): Promise<CallToolResult> => {
     );
 
     if (response.status !== 200) {
-      throw new Error("Failed to get escalation policies.");
+      throw new Error(
+        `Failed to list escalation policies. Status: ${
+          response.status
+        }, Message: ${
+          response.data?.message || "No additional details available."
+        }`
+      );
     }
 
     return getTextContent(
