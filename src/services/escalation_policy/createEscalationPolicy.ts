@@ -74,7 +74,7 @@ const createEscalationPolicy = async (
     };
 
     const response = await apiInstance.post(
-      `/v3/escalation-policy`,
+      `/v3/escalation-policies`,
       requestBody,
       {
         headers: {

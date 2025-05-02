@@ -6,7 +6,7 @@ import getTextContent from "../../utils/contentModifiers/text";
 const listEscalationPolicies = async (): Promise<CallToolResult> => {
   try {
     const response = await apiInstance.get(
-      `/v3/escalation-policy?owner_id=${await store.team.get()}`,
+      `/v3/escalation-policies?owner_id=${await store.team.get()}`,
       {
         headers: {
           Authorization: `Bearer ${await store.accessToken.get()}`,
