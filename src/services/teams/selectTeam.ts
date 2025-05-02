@@ -2,6 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 
 import getTextContent from "../../utils/contentModifiers/text";
 import { store } from "../../utils/store";
+import logger from "../../utils/logger";
 
 const selectTeam = async (data: {
   teamId: string;
@@ -13,7 +14,7 @@ const selectTeam = async (data: {
       `Team selected successfully. Team ID: ${data.teamId}`
     );
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

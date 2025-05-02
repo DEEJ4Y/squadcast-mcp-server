@@ -2,6 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import getTextContent from "../../utils/contentModifiers/text";
 import { store } from "../../utils/store";
 import { apiInstance } from "../../utils/axios";
+import logger from "../../utils/logger";
 
 const whoIsOnCall = async (): Promise<CallToolResult> => {
   try {
@@ -19,7 +20,7 @@ const whoIsOnCall = async (): Promise<CallToolResult> => {
       `Who is on call:\n\n${JSON.stringify(response.data.data, null, 2)}`
     );
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

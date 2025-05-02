@@ -3,6 +3,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { apiInstance } from "../../utils/axios";
 import getTextContent from "../../utils/contentModifiers/text";
 import { store } from "../../utils/store";
+import logger from "../../utils/logger";
 
 const getTeams = async (): Promise<CallToolResult> => {
   try {
@@ -29,7 +30,7 @@ const getTeams = async (): Promise<CallToolResult> => {
       )}`
     );
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

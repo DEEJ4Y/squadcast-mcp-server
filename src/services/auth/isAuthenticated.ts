@@ -5,6 +5,7 @@ import { authInstance } from "../../utils/axios";
 import getTextContent from "../../utils/contentModifiers/text";
 import { store } from "../../utils/store";
 import getConfig from "../../utils/config";
+import logger from "../../utils/logger";
 
 const isAuthenticated = async (): Promise<CallToolResult> => {
   try {
@@ -43,7 +44,7 @@ const isAuthenticated = async (): Promise<CallToolResult> => {
       "Access token generated successfully. User is now authenticated."
     );
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

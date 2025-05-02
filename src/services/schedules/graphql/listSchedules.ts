@@ -2,6 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { store } from "../../../utils/store";
 import { apiInstance } from "../../../utils/axios";
 import getTextContent from "../../../utils/contentModifiers/text";
+import logger from "../../../utils/logger";
 
 const listSchedules = async (data: {
   query: string;
@@ -23,7 +24,7 @@ const listSchedules = async (data: {
       `Response:\n\n${JSON.stringify(response.data, null, 2)}`
     );
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

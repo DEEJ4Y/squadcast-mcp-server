@@ -3,6 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 
 import initTools from "./tools";
 import getConfig from "./utils/config";
+import logger from "./utils/logger";
 
 // Create server instance
 const server = new McpServer({
@@ -20,14 +21,14 @@ initTools(server);
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.log("Squadcast MCP Server running on stdio");
+  logger.info("Squadcast MCP Server running on stdio");
 
-  console.log("Config:", await getConfig());
+  logger.info("Config:", await getConfig());
 }
 
 try {
   main();
 } catch (error) {
-  console.error("Fatal error in main():", error);
+  logger.error("Fatal error in main():", error);
   process.exit(1);
 }

@@ -2,6 +2,7 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { apiInstance } from "../../../utils/axios";
 import { store } from "../../../utils/store";
 import getTextContent from "../../../utils/contentModifiers/text";
+import logger from "../../../utils/logger";
 
 const addIncidentNote = async (data: {
   incidentId: string;
@@ -29,7 +30,7 @@ const addIncidentNote = async (data: {
 
     return getTextContent(`Added note to incident.`);
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return getTextContent(
       error instanceof Error ? error.message : "Something went wrong."
     );

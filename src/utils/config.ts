@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import logger from "./logger";
 const getConfig = async () => {
   try {
     const configPath = process.argv[1].includes("/")
@@ -8,7 +9,7 @@ const getConfig = async () => {
         "\\..\\config.json"
       : "config.json";
 
-    console.log("Config path:", configPath);
+    logger.info("Config path:", configPath);
 
     const configFile = await fs.readFile(configPath, "utf-8");
 
@@ -16,7 +17,7 @@ const getConfig = async () => {
 
     return config;
   } catch (error) {
-    console.error(error);
+    logger.error(error);
     return null;
   }
 };
