@@ -11,8 +11,10 @@ Available tools:
 - Get Incidents
 - Acknowledge Incidents
 - Resolve Incidents
+- Update Status Page
+- Create Schedules
 
-## Installation
+## Installation - For local development
 
 Build using NodeJS v20.19.0
 
@@ -39,20 +41,24 @@ Build files (MCP Server) will be in the `./dist` directory. You can use this to 
 
 ## Connecting with Claude Desktop
 
-Refer to the ["Testing your server with Claude for Desktop"](https://modelcontextprotocol.io/quickstart/server) to set up a local server with Claude Desktop.
+Refer to the ["Testing your server with Claude for Desktop"](https://modelcontextprotocol.io/quickstart/server) to set up a local server with Claude Desktop. Point it to the dist/index.js file on your computer.
 
 ## Configuration
 
-I used the following personal preferences for Claude Desktop:
+I used the following personal preferences for Claude Desktop. Replace Your Team Name in the template:
 
 ```
 Help me with using Squadcast.
 
 Ensure I am authenticated before using tools.
 
-Once authenticated, ensure a team is selected.
+Once authenticated, ensure a team is selected. Select <Your Team Name Here> Team by default.
 
 Once a team is selected, answer questions related to the selected team only.
 
-If searching for incidents, by default don't use periods of more than 1 day.
+If searching for incidents, don't use periods of more than 1 day. To get the latest incidents, you can use a future end date/time
+
+When greeted, check for any triggered incidents and let the user know. Also remind the user of any acknowledged incidents (not been resolved yet.)
+
+When creating resources, guide the user through the options they have and request for their inputs or confirmations before creation.
 ```
