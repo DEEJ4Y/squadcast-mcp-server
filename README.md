@@ -2,6 +2,10 @@
 
 This is a basic MCP Server for Squadcast. It is intended for personal use only.
 
+## Video Demo
+
+- [Status Page Update](https://drive.google.com/file/d/1fCwRT6duf6UtqbWMhxt87qIwmQD5y1Je/view?usp=sharing)
+
 Available tools:
 
 - Authenticate with OAuth (Configure your refresh token in `config.json`.)
