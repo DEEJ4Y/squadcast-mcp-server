@@ -8,7 +8,32 @@ const store_1 = require("../../utils/store");
 const text_1 = __importDefault(require("../../utils/contentModifiers/text"));
 const createEscalationPolicy = async (body) => {
     try {
-        const response = await axios_1.apiInstance.post(`/v3/escalation-policies`, body, {
+        const requestBody = {
+            description: body.description || "",
+            name: body.name,
+            owner_id: body.owner_id,
+            repetition: body.repetition || 0,
+            repeat_after: body.repeat_after || 0,
+            rules: body.rules.map((rule) => ({
+                escalationTime: rule.escalationTime || 0,
+                isViaPersonal: rule.isViaPersonal || false,
+                entities: rule.entities.map((entity) => ({
+                    id: entity.id,
+                    type: entity.type,
+                })),
+                via: rule.via,
+                roundrobin_enabled: rule.roundrobin_enabled || false,
+            })),
+            enable_incident_reminders: body.enable_incident_reminders || false,
+            incident_reminder_rules: body.incident_reminder_rules || [],
+            enable_incident_retrigger: body.enable_incident_retrigger || false,
+            retrigger_after: body.retrigger_after || 0,
+            entity_owner: {
+                id: body.entity_owner.id,
+                type: body.entity_owner.type,
+            },
+        };
+        const response = await axios_1.apiInstance.post(`/v3/escalation-policies`, requestBody, {
             headers: {
                 Authorization: `Bearer ${await store_1.store.accessToken.get()}`,
             },
