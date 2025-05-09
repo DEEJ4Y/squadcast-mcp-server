@@ -9,6 +9,7 @@ const acknowledge_1 = __importDefault(require("../services/incidents/acknowledge
 const resolve_1 = __importDefault(require("../services/incidents/resolve"));
 const update_1 = __importDefault(require("../services/incidents/priority/update"));
 const add_1 = __importDefault(require("../services/incidents/notes/add"));
+const reassign_1 = require("../services/incidents/reassign");
 const initIncidentsTools = (server) => {
     server.tool("listIncidents", `List all incidents (with filters). Use the 'getTime' tool to get the current time.`, {
         startTime: zod_1.default
@@ -31,6 +32,15 @@ const initIncidentsTools = (server) => {
             .array(zod_1.default.string())
             .describe("An array of incident IDs to resolve."),
     }, resolve_1.default);
+    server.tool("reassignIncident", "Reassign an incident to a user, squad, or escalation policy.", {
+        incidentID: zod_1.default.string().describe("The ID of the incident to reassign."),
+        assigneeID: zod_1.default
+            .string()
+            .describe("The ID of the user, squad, or escalation policy to reassign the incident to."),
+        assigneeType: zod_1.default
+            .enum(["user", "squad", "escalationpolicy"])
+            .describe("The type of the assignee. Should be one of: 'user', 'squad', 'escalationpolicy'."),
+    }, reassign_1.reassignIncident);
     // Priority
     server.tool("updateIncidentPriorities", "Update the priority of incidents given an array of incident IDs and a priority.", {
         incidentIds: zod_1.default

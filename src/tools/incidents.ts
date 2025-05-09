@@ -5,6 +5,7 @@ import acknowledgeIncidents from "../services/incidents/acknowledge";
 import resolveIncidents from "../services/incidents/resolve";
 import updateIncidentPriorities from "../services/incidents/priority/update";
 import addIncidentNote from "../services/incidents/notes/add";
+import { reassignIncident } from "../services/incidents/reassign";
 
 const initIncidentsTools = (server: McpServer) => {
   server.tool(
@@ -50,6 +51,25 @@ const initIncidentsTools = (server: McpServer) => {
         .describe("An array of incident IDs to resolve."),
     },
     resolveIncidents
+  );
+
+  server.tool(
+    "reassignIncident",
+    "Reassign an incident to a user, squad, or escalation policy.",
+    {
+      incidentID: z.string().describe("The ID of the incident to reassign."),
+      assigneeID: z
+        .string()
+        .describe(
+          "The ID of the user, squad, or escalation policy to reassign the incident to."
+        ),
+      assigneeType: z
+        .enum(["user", "squad", "escalationpolicy"])
+        .describe(
+          "The type of the assignee. Should be one of: 'user', 'squad', 'escalationpolicy'."
+        ),
+    },
+    reassignIncident
   );
 
   // Priority
